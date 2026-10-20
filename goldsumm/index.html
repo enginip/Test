@@ -2,28 +2,28 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Bitter:wght@400;600;700&family=Alegreya+Sans:wght@400;500;700&family=Courier+Prime:wght@400;700&display=swap">
 <style>
 /* Layout: Honig-Band als Hero, darunter ruhige Abschnitte; Wabenmuster als einziges Ornament */
 :root{
-  --bg:#FFFDF6; --fg:#23200F; --muted:#6B6552; --line:#E8E0C8; --surface:#FFF4D2;
-  --honey:#E8A300; --honey-deep:#B97A00; --leaf:#3E5C3A; --on-honey:#23200F;
-  --display:"Gloock", Georgia, "Times New Roman", serif;
-  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --bg:#F6EFE3; --fg:#3B2A1E; --muted:#6E5B48; --line:#E0D2BC; --surface:#E6D3B3;
+  --honey:#C9A57B; --honey-deep:#8A5A2B; --leaf:#4D6244; --on-honey:#3B2A1E;
+  --display:"Bitter", Georgia, serif; --script:"Yellowtail", "Brush Script MT", cursive;
+  --body:"Alegreya Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Courier Prime", "Courier New", monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#15130C; --fg:#F4EEDC; --muted:#ABA188; --line:#3A3420; --surface:#221E12;
-  --honey:#F2B21B; --honey-deep:#F2B21B; --leaf:#93B585; --on-honey:#23200F; color-scheme:dark}}
+  --bg:#1C1610; --fg:#F1E6D3; --muted:#B5A58E; --line:#45372A; --surface:#2A2118;
+  --honey:#D9B88C; --honey-deep:#D9B88C; --leaf:#7E9471; --on-honey:#3B2A1E; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#15130C; --fg:#F4EEDC; --muted:#ABA188; --line:#3A3420; --surface:#221E12;
-  --honey:#F2B21B; --honey-deep:#F2B21B; --leaf:#93B585; --on-honey:#23200F; color-scheme:dark}
+  --bg:#1C1610; --fg:#F1E6D3; --muted:#B5A58E; --line:#45372A; --surface:#2A2118;
+  --honey:#D9B88C; --honey-deep:#D9B88C; --leaf:#7E9471; --on-honey:#3B2A1E; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1rem;line-height:1.6}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 .wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;text-wrap:balance;margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.08;text-wrap:balance;margin:0}
 h2{font-size:clamp(1.9rem,4vw,2.8rem)}
 h3{font-size:1.35rem}
 p{margin:0}
@@ -39,7 +39,7 @@ section+section{border-top:1px solid var(--line)}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.brand span{font-family:var(--display);font-size:1.5rem}
+.brand span{font-family:var(--script);font-size:1.9rem;line-height:1}
 .nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-weight:500}
 .nav ul a{text-decoration:none}
 .nav ul a:hover{color:var(--honey-deep)}
@@ -48,18 +48,18 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 @media (max-width:760px){.nav ul{display:none}}
 
 /* Hero */
-.hero{background:var(--honey);color:var(--on-honey);position:relative;overflow:hidden;border-top:0}
+.hero{background:radial-gradient(rgba(59,42,30,.10) 1px,transparent 1.6px) 0 0/9px 9px,radial-gradient(rgba(255,250,240,.14) 1px,transparent 1.6px) 4px 5px/13px 13px,var(--honey);color:var(--on-honey);position:relative;overflow:hidden;border-top:0}
 .hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;position:relative;z-index:1}
-.hero h1{font-size:clamp(2.6rem,7vw,5.2rem);letter-spacing:-.01em}
+.hero h1{font-family:var(--script);font-size:clamp(3rem,8vw,6rem);line-height:1.05}
 .hero p.lead{color:var(--on-honey);opacity:.85;margin-top:20px}
 .hero .eyebrow{color:var(--on-honey);opacity:.75;margin-bottom:18px}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font:600 1rem var(--body);text-decoration:none;cursor:pointer;border:2px solid transparent}
-.btn-dark{background:#23200F;color:#FFF4D2}
-.btn-dark:hover{background:#3a341c}
-.btn-line{border-color:#23200F;color:#23200F;background:transparent}
-.btn-line:hover{background:rgba(35,32,15,.08)}
-.comb{position:absolute;inset:0;width:100%;height:100%;color:#23200F;opacity:.09;pointer-events:none}
+.btn-dark{background:#3B2A1E;color:#E6D3B3}
+.btn-dark:hover{background:#54402F}
+.btn-line{border-color:#3B2A1E;color:#3B2A1E;background:transparent}
+.btn-line:hover{background:rgba(59,42,30,.08)}
+.comb{display:none}
 .jar{justify-self:center;width:min(340px,100%)}
 .jar svg{width:100%;height:auto;display:block}
 @media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.jar{width:min(240px,70%)}}
@@ -112,16 +112,16 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 .colors{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .chip{display:grid;gap:6px;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
 .chip i{display:block;aspect-ratio:1;max-width:100%;border-radius:8px;border:1px solid var(--line)}
-.type-sample .d{font-family:var(--display);font-size:2.2rem;line-height:1}
+.type-sample .d{font-family:var(--script);font-size:2.6rem;line-height:1}
 .type-sample .b{font-size:1rem}
 .type-sample .u{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
 
 /* Etikett */
 .label-wrap{display:grid;place-items:center;background:var(--surface);border-radius:10px;padding:22px 12px}
-.label{width:min(300px,100%);background:#FFFDF6;color:#23200F;border-radius:8px;padding:18px 18px 14px;border:2px solid #23200F;display:grid;gap:8px;text-align:center}
-.label .nm{font-family:var(--display);font-size:1.9rem;line-height:1}
-.label .sort{font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem;background:#E8A300;padding:4px 0;border-radius:4px}
-.label .row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;border-top:1px dashed #23200F;padding-top:6px;gap:8px;text-align:left}
+.label{width:min(300px,100%);background:#C9A57B;color:#3B2A1E;border-radius:8px;padding:18px 18px 14px;border:2px solid #3B2A1E;display:grid;gap:8px;text-align:center}
+.label .nm{font-family:var(--script);font-size:2.4rem;line-height:1}
+.label .sort{font-family:var(--display);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;color:#F6EFE3;background:#4D6244;padding:4px 0;border-radius:4px}
+.label .row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;border-top:1px dashed #3B2A1E;padding-top:6px;gap:8px;text-align:left}
 .label .addr{font-size:.7rem;line-height:1.35}
 
 /* Namen */
@@ -146,10 +146,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="mark" viewBox="0 0 64 64">
-      <path d="M32 3 57 17.5v29L32 61 7 46.5v-29Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
-      <path d="M32 17c-6 9-10 14.5-10 20a10 10 0 0 0 20 0c0-5.5-4-11-10-20Z" fill="currentColor"/>
-      <path d="M26 40.5c1.2 2.6 3.4 4 6 4" fill="none" stroke="var(--mark-cut,#E8A300)" stroke-width="2.4" stroke-linecap="round"/>
+    <symbol id="mark" viewBox="0 0 120 120">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="60" cy="60" r="55" stroke-width="3"/><circle cx="60" cy="60" r="49" stroke-width="1.6" stroke-dasharray="1 4"/><ellipse cx="46" cy="49" rx="10" ry="15" transform="rotate(-32 46 49)" stroke-width="2.6"/><ellipse cx="74" cy="49" rx="10" ry="15" transform="rotate(32 74 49)" stroke-width="2.6"/><path d="M57 33q-3-8-9-10M63 33q3-8 9-10" stroke-width="2.4"/><path d="M60 82v6" stroke-width="2.6"/></g>
+      <circle cx="60" cy="38" r="7" fill="currentColor"/><ellipse cx="60" cy="63" rx="13" ry="19" fill="currentColor"/>
+      <path d="M48 57q12 4 24 0M47.5 67q12.5 4 25 0" fill="none" stroke="var(--mark-cut,#C9A57B)" stroke-width="3" stroke-linecap="round"/>
     </symbol>
   </defs>
 </svg>
@@ -182,7 +182,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
     </svg>
     <div class="wrap">
       <div>
-        <p class="eyebrow">Imkerei &middot; Honig direkt vom Bienenstand</p>
+        <p class="eyebrow">Imkerei &middot; seit 2026</p>
         <h1>Honig, der nach unserer Gegend schmeckt.</h1>
         <p class="lead">Von unseren eigenen Völkern, kalt geschleudert, von Hand abgefüllt und in 1–2 Werktagen bei dir. Kein Mischhonig, kein Zwischenhandel.</p>
         <div class="hero-cta">
@@ -192,14 +192,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
       </div>
       <div class="jar" aria-hidden="true">
         <svg viewBox="0 0 240 280">
-          <rect x="70" y="18" width="100" height="34" rx="6" fill="#23200F"/>
-          <rect x="70" y="40" width="100" height="5" fill="#E8A300" opacity=".55"/>
-          <path d="M58 60h124c10 0 16 7 16 17v168c0 16-10 25-26 25H68c-16 0-26-9-26-25V77c0-10 6-17 16-17Z" fill="#FFF4D2" stroke="#23200F" stroke-width="4"/>
-          <path d="M46 120c40 14 108-14 148 0v125c0 14-9 21-24 21H70c-15 0-24-7-24-21Z" fill="#C98400"/>
-          <rect x="62" y="132" width="116" height="92" rx="6" fill="#FFFDF6" stroke="#23200F" stroke-width="3"/>
-          <g transform="translate(104 140) scale(.5)" style="color:#23200F;--mark-cut:#FFFDF6"><use href="#mark" width="64" height="64"/></g>
-          <text x="120" y="194" text-anchor="middle" font-family="Gloock, Georgia, serif" font-size="22" fill="#23200F">Goldsumm</text>
-          <text x="120" y="212" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#23200F" letter-spacing="1.5">FRÜHTRACHT · 500 g</text>
+          <rect x="70" y="18" width="100" height="34" rx="6" fill="#3B2A1E"/>
+          <rect x="70" y="40" width="100" height="5" fill="#C9A57B" opacity=".55"/>
+          <path d="M58 60h124c10 0 16 7 16 17v168c0 16-10 25-26 25H68c-16 0-26-9-26-25V77c0-10 6-17 16-17Z" fill="#E6D3B3" stroke="#3B2A1E" stroke-width="4"/>
+          <path d="M46 120c40 14 108-14 148 0v125c0 14-9 21-24 21H70c-15 0-24-7-24-21Z" fill="#D2952B"/>
+          <rect x="62" y="132" width="116" height="92" rx="6" fill="#F6EFE3" stroke="#3B2A1E" stroke-width="3"/>
+          <g transform="translate(104 140) scale(.5)" style="color:#3B2A1E;--mark-cut:#F6EFE3"><use href="#mark" width="64" height="64"/></g>
+          <text x="120" y="194" text-anchor="middle" font-family="Yellowtail, cursive" font-size="28" fill="#3B2A1E">Goldsumm</text>
+          <text x="120" y="212" text-anchor="middle" font-family="Courier Prime, monospace" font-size="9" fill="#3B2A1E" letter-spacing="1.5">FRÜHTRACHT · 500 g</text>
         </svg>
       </div>
     </div>
@@ -260,10 +260,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
         <p class="lead">So könnten deine Posts aussehen: wiederkehrende Formate, die zum Bienenjahr passen. Das hält den Feed lebendig, ohne dass dir die Ideen ausgehen.</p>
       </div>
       <div class="social">
-        <div class="post" style="background:#E8A300"><span class="tag">Reel · Mo</span>Schleudertag: Wabe rein, Honig raus</div>
-        <div class="post" style="background:#C98400"><span class="tag">Karussell · Mi</span>Woran erkennst du echten Imkerhonig?</div>
-        <div class="post" style="background:#93B585"><span class="tag">Story · täglich</span>Kurzer Blick in den Stock</div>
-        <div class="post" style="background:#FFF4D2;border:1px solid var(--line)"><span class="tag">Post · Fr</span>Rezept der Woche mit Waldhonig</div>
+        <div class="post" style="background:#C9A57B"><span class="tag">Reel · Mo</span>Schleudertag: Wabe rein, Honig raus</div>
+        <div class="post" style="background:#D2952B"><span class="tag">Karussell · Mi</span>Woran erkennst du echten Imkerhonig?</div>
+        <div class="post" style="background:#7E9471"><span class="tag">Story · täglich</span>Kurzer Blick in den Stock</div>
+        <div class="post" style="background:#E6D3B3;border:1px solid var(--line)"><span class="tag">Post · Fr</span>Rezept der Woche mit Waldhonig</div>
       </div>
       <div class="handles">
         <span class="handle">Instagram · @goldsumm.honig</span>
@@ -278,33 +278,33 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
       <div class="sec-head">
         <p class="eyebrow">Markenpaket</p>
         <h2>Das Goldsumm-Design</h2>
-        <p class="lead">Logo, Farben, Schriften und Etikett. Das Zeichen verbindet die Wabe mit einem Honigtropfen und funktioniert auch klein als Profilbild oder Stempel.</p>
+        <p class="lead">Logo, Farben, Schriften und Etikett im Stil natürlich und rustikal: eine handgezeichnete Biene im Stempelkreis, Kraftpapier und Salbeigrün.</p>
       </div>
       <div class="kit">
         <div class="panel">
           <h3>Logo</h3>
           <div class="logos">
-            <div style="background:#E8A300;color:#23200F"><div style="display:grid;justify-items:center;gap:6px"><svg width="56" height="56" style="--mark-cut:#E8A300"><use href="#mark"/></svg><span style="font-family:var(--display);font-size:1.4rem">Goldsumm</span></div></div>
-            <div style="background:#23200F;color:#E8A300"><div style="display:grid;justify-items:center;gap:6px"><svg width="56" height="56" style="--mark-cut:#23200F"><use href="#mark"/></svg><span style="font-family:var(--display);font-size:1.4rem;color:#FFF4D2">Goldsumm</span></div></div>
-            <div style="background:#FFFDF6;color:#23200F;border:1px solid var(--line)"><svg width="64" height="64" style="--mark-cut:#FFFDF6"><use href="#mark"/></svg></div>
-            <div style="background:#FFF4D2;color:#23200F"><div style="width:76px;height:76px;border-radius:50%;background:#E8A300;display:grid;place-items:center"><svg width="44" height="44" style="--mark-cut:#E8A300"><use href="#mark"/></svg></div></div>
+            <div style="background:#C9A57B;color:#3B2A1E"><div style="display:grid;justify-items:center;gap:6px"><svg width="56" height="56" style="--mark-cut:#C9A57B"><use href="#mark"/></svg><span style="font-family:var(--script);font-size:1.8rem">Goldsumm</span></div></div>
+            <div style="background:#3B2A1E;color:#C9A57B"><div style="display:grid;justify-items:center;gap:6px"><svg width="56" height="56" style="--mark-cut:#3B2A1E"><use href="#mark"/></svg><span style="font-family:var(--script);font-size:1.8rem;color:#E6D3B3">Goldsumm</span></div></div>
+            <div style="background:#F6EFE3;color:#3B2A1E;border:1px solid var(--line)"><svg width="64" height="64" style="--mark-cut:#F6EFE3"><use href="#mark"/></svg></div>
+            <div style="background:#E6D3B3;color:#3B2A1E"><div style="width:76px;height:76px;border-radius:50%;background:#C9A57B;display:grid;place-items:center"><svg width="44" height="44" style="--mark-cut:#C9A57B"><use href="#mark"/></svg></div></div>
           </div>
           <p class="note" style="margin:0">Unten rechts: Profilbild für Instagram und TikTok.</p>
         </div>
         <div class="panel">
           <h3>Farben</h3>
           <div class="colors">
-            <div class="chip"><i style="background:#E8A300"></i>Honig<br>#E8A300</div>
-            <div class="chip"><i style="background:#C98400"></i>Waldhonig<br>#C98400</div>
-            <div class="chip"><i style="background:#23200F"></i>Beute<br>#23200F</div>
-            <div class="chip"><i style="background:#FFF4D2"></i>Wachs<br>#FFF4D2</div>
-            <div class="chip"><i style="background:#3E5C3A"></i>Linde<br>#3E5C3A</div>
+            <div class="chip"><i style="background:#C9A57B"></i>Kraft<br>#C9A57B</div>
+            <div class="chip"><i style="background:#7E9471"></i>Salbei<br>#7E9471</div>
+            <div class="chip"><i style="background:#3B2A1E"></i>Erde<br>#3B2A1E</div>
+            <div class="chip"><i style="background:#E6D3B3"></i>Leinen<br>#E6D3B3</div>
+            <div class="chip"><i style="background:#D2952B"></i>Honig<br>#D2952B</div>
           </div>
           <h3 style="margin-top:6px">Schriften</h3>
           <div class="type-sample" style="display:grid;gap:6px">
-            <span class="d">Gloock</span>
-            <span class="b">Figtree für Texte, Beschreibungen und den Shop.</span>
-            <span class="u">IBM Plex Mono · Losnummer, Gewicht, MHD</span>
+            <span class="d">Yellowtail</span>
+            <span class="b">Bitter für Überschriften, Alegreya Sans für Texte und Shop.</span>
+            <span class="u">Courier Prime · Losnummer, Gewicht, MHD</span>
           </div>
           <p class="note" style="margin:0">Alle drei sind kostenlose Google Fonts und dürfen kommerziell genutzt werden.</p>
         </div>
@@ -312,7 +312,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
           <h3>Glas-Etikett</h3>
           <div class="label-wrap">
             <div class="label">
-              <svg width="38" height="38" style="justify-self:center;color:#23200F;--mark-cut:#FFFDF6"><use href="#mark"/></svg>
+              <svg width="38" height="38" style="justify-self:center;color:#3B2A1E;--mark-cut:#F6EFE3"><use href="#mark"/></svg>
               <div class="nm">Goldsumm</div>
               <div class="sort">Blütenhonig · cremig</div>
               <div class="row"><span>500 g e</span><span>Honig aus Deutschland</span></div>
@@ -361,10 +361,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
 
 <script>
 const products=[
-  {name:"Frühtrachthonig",kind:"cremig gerührt",weight:"500 g",price:8.9,color:"#F3D27A",desc:"Mild und hell, aus Raps und Obstblüte. Streichzart aufs Brot."},
-  {name:"Sommertrachthonig",kind:"flüssig",weight:"500 g",price:9.5,color:"#E8A300",desc:"Linde und Klee. Blumig, bleibt lange flüssig, ideal für Tee."},
-  {name:"Waldhonig",kind:"flüssig",weight:"500 g",price:11.9,color:"#9C6100",desc:"Dunkel und würzig, aus dem Honigtau von Fichte und Tanne."},
-  {name:"Wabenhonig",kind:"im Stück",weight:"ca. 350 g",price:14.5,color:"#D99A1A",desc:"Direkt aus dem Rähmchen geschnitten. Honig, wie die Biene ihn baut."}
+  {name:"Frühtrachthonig",kind:"cremig gerührt",weight:"500 g",price:8.9,color:"#E6D3B3",desc:"Mild und hell, aus Raps und Obstblüte. Streichzart aufs Brot."},
+  {name:"Sommertrachthonig",kind:"flüssig",weight:"500 g",price:9.5,color:"#C9A57B",desc:"Linde und Klee. Blumig, bleibt lange flüssig, ideal für Tee."},
+  {name:"Waldhonig",kind:"flüssig",weight:"500 g",price:11.9,color:"#7E9471",desc:"Dunkel und würzig, aus dem Honigtau von Fichte und Tanne."},
+  {name:"Wabenhonig",kind:"im Stück",weight:"ca. 350 g",price:14.5,color:"#D2952B",desc:"Direkt aus dem Rähmchen geschnitten. Honig, wie die Biene ihn baut."}
 ];
 const fmt=n=>n.toLocaleString("de-DE",{style:"currency",currency:"EUR"});
 const grid=document.getElementById("products");
@@ -373,7 +373,7 @@ products.forEach((p,i)=>{
   const el=document.createElement("article");
   el.className="product";
   el.innerHTML=`
-    <div class="swatch" style="background:${p.color}"><svg viewBox="0 0 64 64" style="color:#23200F;--mark-cut:${p.color}"><use href="#mark"/></svg></div>
+    <div class="swatch" style="background:${p.color}"><svg viewBox="0 0 64 64" style="color:#3B2A1E;--mark-cut:${p.color}"><use href="#mark"/></svg></div>
     <div><span class="meta">${p.kind} · ${p.weight}</span><h3>${p.name}</h3><p class="desc">${p.desc}</p></div>
     <div class="buy"><span class="price">${fmt(p.price)}<small>inkl. MwSt., zzgl. Versand</small></span>
     <button class="add" type="button" id="add-${i}">In den Warenkorb</button></div>`;
