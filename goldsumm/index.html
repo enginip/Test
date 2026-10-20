@@ -8,6 +8,7 @@
 :root{
   --bg:#F6EFE3; --fg:#3B2A1E; --muted:#6E5B48; --line:#E0D2BC; --surface:#E6D3B3;
   --honey:#C9A57B; --honey-deep:#8A5A2B; --leaf:#4D6244; --on-honey:#3B2A1E;
+  --raute:#6C9BC7;
   --display:"Bitter", Georgia, serif; --script:"Yellowtail", "Brush Script MT", cursive;
   --body:"Alegreya Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono:"Courier Prime", "Courier New", monospace;
@@ -137,7 +138,9 @@ td code{font-family:var(--mono);font-size:.85rem}
 .pill.pick{background:var(--honey);color:var(--on-honey)}
 .pill.warn{background:color-mix(in srgb,var(--honey-deep) 16%,transparent);color:var(--honey-deep)}
 
-footer{border-top:1px solid var(--line);padding-block:40px;font-size:.88rem;color:var(--muted)}
+.raute{height:12px;background:linear-gradient(135deg,var(--raute) 25%,transparent 25%) -6px 0/12px 12px,linear-gradient(225deg,var(--raute) 25%,transparent 25%) -6px 0/12px 12px,linear-gradient(315deg,var(--raute) 25%,transparent 25%) 0 0/12px 12px,linear-gradient(45deg,var(--raute) 25%,transparent 25%) 0 0/12px 12px,var(--bg)}
+.hero .raute{position:absolute;left:0;right:0;bottom:0}
+footer{padding-block:40px;font-size:.88rem;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
 
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:20}
@@ -182,9 +185,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
     </svg>
     <div class="wrap">
       <div>
-        <p class="eyebrow">Imkerei &middot; seit 2026</p>
-        <h1>Honig, der nach unserer Gegend schmeckt.</h1>
-        <p class="lead">Von unseren eigenen Völkern, kalt geschleudert, von Hand abgefüllt und in 1–2 Werktagen bei dir. Kein Mischhonig, kein Zwischenhandel.</p>
+        <p class="eyebrow">Imkerei in Franken &middot; Bayern</p>
+        <h1>Honig, der nach Franken schmeckt.</h1>
+        <p class="lead">Von unseren eigenen Völkern, kalt geschleudert, von Hand abgefüllt. Versand in ganz Deutschland in 1–2 Werktagen, auf Anfrage auch in die EU.</p>
         <div class="hero-cta">
           <a class="btn btn-dark" href="#honig">Honig ansehen</a>
           <a class="btn btn-line" href="#imkerei">Unsere Bienen</a>
@@ -203,6 +206,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
         </svg>
       </div>
     </div>
+    <div class="raute" aria-hidden="true"></div>
   </section>
 
   <section id="honig">
@@ -231,12 +235,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
         <div class="sec-head" style="margin:0">
           <p class="eyebrow">Über uns</p>
           <h2>Kleine Imkerei, große Sorgfalt</h2>
-          <p>Hier stellst du dich vor: wer du bist, seit wann du imkerst und wo deine Bienen stehen. Kunden kaufen Honig von Menschen. Ein Foto von dir am Bienenstand verkauft mehr als jedes Produktbild.</p>
+          <p>Hier stellst du dich vor: wer du bist, seit wann du imkerst und wo in Franken deine Bienen stehen. Kunden kaufen Honig von Menschen. Ein Foto von dir am Bienenstand verkauft mehr als jedes Produktbild.</p>
           <p>Erzähle, was deinen Honig besonders macht: die Lage der Stände, die Trachtpflanzen in der Nähe, wie du schleuderst und abfüllst.</p>
         </div>
         <div class="facts">
           <div><b>12</b><span>Bienenvölker (Beispiel)</span></div>
-          <div><b>4</b><span>Standorte in der Region</span></div>
+          <div><b>4</b><span>Standorte in Franken (Beispiel)</span></div>
           <div><b>&lt; 18 %</b><span>Wassergehalt, unter dem DIB-Grenzwert</span></div>
           <div><b>0 km</b><span>Zwischenhandel</span></div>
         </div>
@@ -315,7 +319,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
               <svg width="38" height="38" style="justify-self:center;color:#3B2A1E;--mark-cut:#F6EFE3"><use href="#mark"/></svg>
               <div class="nm">Goldsumm</div>
               <div class="sort">Blütenhonig · cremig</div>
-              <div class="row"><span>500 g e</span><span>Honig aus Deutschland</span></div>
+              <div class="row"><span>500 g e</span><span>Honig aus Franken, Deutschland</span></div>
               <div class="row"><span>MHD 09/2028</span><span>L 2026-03</span></div>
               <div class="addr">Imkerei Goldsumm · Vorname Nachname<br>Straße 1 · 12345 Ort</div>
             </div>
@@ -350,9 +354,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
   </section>
 </main>
 
+<div class="raute" aria-hidden="true"></div>
 <footer>
   <div class="wrap">
-    <span>© 2026 Goldsumm Imkerei · Entwurf</span>
+    <span>© 2026 Imkerei Goldsumm · Franken, Bayern · Entwurf</span>
     <span>Impressum · Datenschutz · Versand &amp; Zahlung · Widerruf</span>
   </div>
 </footer>
@@ -363,7 +368,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
 const products=[
   {name:"Frühtrachthonig",kind:"cremig gerührt",weight:"500 g",price:8.9,color:"#E6D3B3",desc:"Mild und hell, aus Raps und Obstblüte. Streichzart aufs Brot."},
   {name:"Sommertrachthonig",kind:"flüssig",weight:"500 g",price:9.5,color:"#C9A57B",desc:"Linde und Klee. Blumig, bleibt lange flüssig, ideal für Tee."},
-  {name:"Waldhonig",kind:"flüssig",weight:"500 g",price:11.9,color:"#7E9471",desc:"Dunkel und würzig, aus dem Honigtau von Fichte und Tanne."},
+  {name:"Waldhonig",kind:"flüssig",weight:"500 g",price:11.9,color:"#7E9471",desc:"Dunkel und würzig, aus dem Honigtau fränkischer Fichten und Tannen."},
   {name:"Wabenhonig",kind:"im Stück",weight:"ca. 350 g",price:14.5,color:"#D2952B",desc:"Direkt aus dem Rähmchen geschnitten. Honig, wie die Biene ihn baut."}
 ];
 const fmt=n=>n.toLocaleString("de-DE",{style:"currency",currency:"EUR"});
