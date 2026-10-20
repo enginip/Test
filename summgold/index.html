@@ -1,0 +1,393 @@
+<title>Summgold Imkerei</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Honig-Band als Hero, darunter ruhige Abschnitte; Wabenmuster als einziges Ornament */
+:root{
+  --bg:#FFFDF6; --fg:#23200F; --muted:#6B6552; --line:#E8E0C8; --surface:#FFF4D2;
+  --honey:#E8A300; --honey-deep:#B97A00; --leaf:#3E5C3A; --on-honey:#23200F;
+  --display:"Gloock", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#15130C; --fg:#F4EEDC; --muted:#ABA188; --line:#3A3420; --surface:#221E12;
+  --honey:#F2B21B; --honey-deep:#F2B21B; --leaf:#93B585; --on-honey:#23200F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15130C; --fg:#F4EEDC; --muted:#ABA188; --line:#3A3420; --surface:#221E12;
+  --honey:#F2B21B; --honey-deep:#F2B21B; --leaf:#93B585; --on-honey:#23200F; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1rem;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+h3{font-size:1.35rem}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:1.125rem;max-width:60ch;color:var(--muted)}
+section{padding-block:clamp(56px,8vw,96px)}
+section+section{border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:12px;margin-bottom:40px;max-width:68ch}
+:focus-visible{outline:3px solid var(--honey);outline-offset:3px;border-radius:4px}
+
+/* Header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand span{font-family:var(--display);font-size:1.5rem}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-weight:500}
+.nav ul a{text-decoration:none}
+.nav ul a:hover{color:var(--honey-deep)}
+.cart{display:flex;align-items:center;gap:8px;border:1.5px solid var(--fg);border-radius:999px;padding:6px 14px;background:none;color:var(--fg);font:600 .9rem var(--body);cursor:pointer}
+.cart b{background:var(--honey);color:var(--on-honey);border-radius:999px;min-width:22px;padding:0 6px;font-variant-numeric:tabular-nums}
+@media (max-width:760px){.nav ul{display:none}}
+
+/* Hero */
+.hero{background:var(--honey);color:var(--on-honey);position:relative;overflow:hidden;border-top:0}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;position:relative;z-index:1}
+.hero h1{font-size:clamp(2.6rem,7vw,5.2rem);letter-spacing:-.01em}
+.hero p.lead{color:var(--on-honey);opacity:.85;margin-top:20px}
+.hero .eyebrow{color:var(--on-honey);opacity:.75;margin-bottom:18px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font:600 1rem var(--body);text-decoration:none;cursor:pointer;border:2px solid transparent}
+.btn-dark{background:#23200F;color:#FFF4D2}
+.btn-dark:hover{background:#3a341c}
+.btn-line{border-color:#23200F;color:#23200F;background:transparent}
+.btn-line:hover{background:rgba(35,32,15,.08)}
+.comb{position:absolute;inset:0;width:100%;height:100%;color:#23200F;opacity:.09;pointer-events:none}
+.jar{justify-self:center;width:min(340px,100%)}
+.jar svg{width:100%;height:auto;display:block}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.jar{width:min(240px,70%)}}
+
+/* Sortiment */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.product{display:grid;grid-template-rows:auto 1fr auto;gap:14px;border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--bg)}
+.swatch{aspect-ratio:4/3;max-width:100%;border-radius:10px;display:grid;place-items:center}
+.swatch svg{width:46%;height:auto}
+.product .meta{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.product p.desc{color:var(--muted);font-size:.95rem;margin-top:6px}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price{font-family:var(--display);font-size:1.6rem;font-variant-numeric:tabular-nums}
+.price small{font-family:var(--mono);font-size:.7rem;color:var(--muted);display:block;line-height:1.2}
+.add{background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:10px 16px;font:600 .9rem var(--body);cursor:pointer}
+.add.done{background:var(--leaf);color:var(--bg)}
+.note{margin-top:20px;font-size:.85rem;color:var(--muted)}
+
+.abo{margin-top:40px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;background:var(--surface);border-radius:16px;padding:28px}
+.abo p{color:var(--muted);margin-top:8px;max-width:58ch}
+@media (max-width:700px){.abo{grid-template-columns:1fr}}
+
+/* Bienenjahr */
+.year{display:grid;grid-template-columns:repeat(5,1fr);gap:0;list-style:none;margin:0;padding:0;border-top:2px solid var(--fg)}
+.year li{padding:18px 18px 0 0;display:grid;gap:6px;align-content:start}
+.year .m{font-family:var(--mono);font-size:.8rem;color:var(--honey-deep);font-weight:500}
+.year p{color:var(--muted);font-size:.95rem}
+@media (max-width:820px){.year{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.year{grid-template-columns:1fr}}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:56px}
+.about p+p{margin-top:14px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;align-self:start}
+.facts div{background:var(--bg);padding:18px}
+.facts b{font-family:var(--display);font-weight:400;font-size:2rem;display:block;font-variant-numeric:tabular-nums}
+.facts span{font-size:.85rem;color:var(--muted)}
+@media (max-width:760px){.about{grid-template-columns:1fr}}
+
+/* Social */
+.social{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.post{aspect-ratio:1;max-width:100%;border-radius:10px;display:grid;align-content:end;padding:14px;color:var(--on-honey);font-weight:600;font-size:.9rem;position:relative;overflow:hidden}
+.post .tag{font-family:var(--mono);font-size:.7rem;font-weight:400;opacity:.8}
+.handles{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.handle{font-family:var(--mono);font-size:.9rem;border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+
+/* Markenpaket */
+.kit{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.panel{border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:16px;align-content:start;min-width:0}
+.logos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.logos div{border-radius:10px;display:grid;place-items:center;padding:22px 10px;min-height:130px}
+.colors{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.chip{display:grid;gap:6px;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.chip i{display:block;aspect-ratio:1;max-width:100%;border-radius:8px;border:1px solid var(--line)}
+.type-sample .d{font-family:var(--display);font-size:2.2rem;line-height:1}
+.type-sample .b{font-size:1rem}
+.type-sample .u{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+
+/* Etikett */
+.label-wrap{display:grid;place-items:center;background:var(--surface);border-radius:10px;padding:22px 12px}
+.label{width:min(300px,100%);background:#FFFDF6;color:#23200F;border-radius:8px;padding:18px 18px 14px;border:2px solid #23200F;display:grid;gap:8px;text-align:center}
+.label .nm{font-family:var(--display);font-size:1.9rem;line-height:1}
+.label .sort{font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem;background:#E8A300;padding:4px 0;border-radius:4px}
+.label .row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;border-top:1px dashed #23200F;padding-top:6px;gap:8px;text-align:left}
+.label .addr{font-size:.7rem;line-height:1.35}
+
+/* Namen */
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:0}
+td.nm{font-family:var(--display);font-size:1.3rem;white-space:nowrap}
+td code{font-family:var(--mono);font-size:.85rem}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:color-mix(in srgb,var(--leaf) 18%,transparent);color:var(--leaf)}
+.pill.pick{background:var(--honey);color:var(--on-honey)}
+.pill.warn{background:color-mix(in srgb,var(--honey-deep) 16%,transparent);color:var(--honey-deep)}
+
+footer{border-top:1px solid var(--line);padding-block:40px;font-size:.88rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:20}
+@media (prefers-reduced-motion:no-preference){.add,.btn{transition:background .15s}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="0 0 64 64">
+      <path d="M32 3 57 17.5v29L32 61 7 46.5v-29Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M32 17c-6 9-10 14.5-10 20a10 10 0 0 0 20 0c0-5.5-4-11-10-20Z" fill="currentColor"/>
+      <path d="M26 40.5c1.2 2.6 3.4 4 6 4" fill="none" stroke="var(--mark-cut,#E8A300)" stroke-width="2.4" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Summgold Startseite">
+      <svg width="34" height="34" style="color:var(--fg);--mark-cut:var(--bg)"><use href="#mark"/></svg>
+      <span>Summgold</span>
+    </a>
+    <ul>
+      <li><a href="#honig">Honig</a></li>
+      <li><a href="#imkerei">Imkerei</a></li>
+      <li><a href="#marke">Marke</a></li>
+      <li><a href="#namen">Namen &amp; Domains</a></li>
+    </ul>
+    <button class="cart" id="cart" type="button" aria-live="polite">Warenkorb <b id="cart-count">0</b></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <svg class="comb" aria-hidden="true">
+      <defs>
+        <pattern id="hex" width="56" height="97" patternUnits="userSpaceOnUse">
+          <path d="M28 0 56 16v32L28 64 0 48V16Z M28 64v33" fill="none" stroke="currentColor" stroke-width="2"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hex)"/>
+    </svg>
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Imkerei &middot; Honig direkt vom Bienenstand</p>
+        <h1>Honig, der nach unserer Gegend schmeckt.</h1>
+        <p class="lead">Von unseren eigenen Völkern, kalt geschleudert, von Hand abgefüllt und in 1–2 Werktagen bei dir. Kein Mischhonig, kein Zwischenhandel.</p>
+        <div class="hero-cta">
+          <a class="btn btn-dark" href="#honig">Honig ansehen</a>
+          <a class="btn btn-line" href="#imkerei">Unsere Bienen</a>
+        </div>
+      </div>
+      <div class="jar" aria-hidden="true">
+        <svg viewBox="0 0 240 280">
+          <rect x="70" y="18" width="100" height="34" rx="6" fill="#23200F"/>
+          <rect x="70" y="40" width="100" height="5" fill="#E8A300" opacity=".55"/>
+          <path d="M58 60h124c10 0 16 7 16 17v168c0 16-10 25-26 25H68c-16 0-26-9-26-25V77c0-10 6-17 16-17Z" fill="#FFF4D2" stroke="#23200F" stroke-width="4"/>
+          <path d="M46 120c40 14 108-14 148 0v125c0 14-9 21-24 21H70c-15 0-24-7-24-21Z" fill="#C98400"/>
+          <rect x="62" y="132" width="116" height="92" rx="6" fill="#FFFDF6" stroke="#23200F" stroke-width="3"/>
+          <g transform="translate(104 140) scale(.5)" style="color:#23200F;--mark-cut:#FFFDF6"><use href="#mark" width="64" height="64"/></g>
+          <text x="120" y="194" text-anchor="middle" font-family="Gloock, Georgia, serif" font-size="22" fill="#23200F">Summgold</text>
+          <text x="120" y="212" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#23200F" letter-spacing="1.5">FRÜHTRACHT · 500 g</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="honig">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Sortiment</p>
+        <h2>Unsere Honige</h2>
+        <p class="lead">Jede Sorte stammt aus einer eigenen Tracht. Was die Bienen gerade finden, bestimmt Farbe, Geschmack und Konsistenz.</p>
+      </div>
+      <div class="grid" id="products"></div>
+      <p class="note">Beispielpreise zur Orientierung. Übliche Imkerpreise liegen 2026 bei etwa 8–12 € pro 500 g; passe sie an deine Kosten an.</p>
+
+      <div class="abo">
+        <div>
+          <h3>Honig-Abo</h3>
+          <p>Alle 2 Monate ein Glas aus der aktuellen Ernte, frei Haus. Jederzeit pausierbar. Die beste Möglichkeit, aus Social-Media-Fans Stammkunden zu machen.</p>
+        </div>
+        <a class="btn btn-dark" href="#honig" style="background:var(--fg);color:var(--bg)">Ab 9,50 € / Glas</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="imkerei">
+    <div class="wrap">
+      <div class="about">
+        <div class="sec-head" style="margin:0">
+          <p class="eyebrow">Über uns</p>
+          <h2>Kleine Imkerei, große Sorgfalt</h2>
+          <p>Hier stellst du dich vor: wer du bist, seit wann du imkerst und wo deine Bienen stehen. Kunden kaufen Honig von Menschen. Ein Foto von dir am Bienenstand verkauft mehr als jedes Produktbild.</p>
+          <p>Erzähle, was deinen Honig besonders macht: die Lage der Stände, die Trachtpflanzen in der Nähe, wie du schleuderst und abfüllst.</p>
+        </div>
+        <div class="facts">
+          <div><b>12</b><span>Bienenvölker (Beispiel)</span></div>
+          <div><b>4</b><span>Standorte in der Region</span></div>
+          <div><b>&lt; 18 %</b><span>Wassergehalt, unter dem DIB-Grenzwert</span></div>
+          <div><b>0 km</b><span>Zwischenhandel</span></div>
+        </div>
+      </div>
+      <p class="eyebrow" style="margin-bottom:16px">Das Bienenjahr bei Summgold</p>
+      <ol class="year">
+        <li><span class="m">März – April</span><h3>Auswintern</h3><p>Erste Durchsicht, Völker kontrollieren, Honigräume vorbereiten.</p></li>
+        <li><span class="m">Mai – Juni</span><h3>Frühtracht</h3><p>Raps, Obstblüte, Löwenzahn. Erste Ernte, meist cremig gerührt.</p></li>
+        <li><span class="m">Juli</span><h3>Sommertracht</h3><p>Linde, Klee, Wald. Zweite Ernte, kräftig und lange flüssig.</p></li>
+        <li><span class="m">August – Sept.</span><h3>Einfüttern</h3><p>Varroabehandlung und Wintervorrat für die Völker.</p></li>
+        <li><span class="m">Okt. – Feb.</span><h3>Winterruhe</h3><p>Die Bienen ruhen. Wir gießen Kerzen und bauen Rähmchen.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="social">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Social Media</p>
+        <h2>Folge dem Bienenstand</h2>
+        <p class="lead">So könnten deine Posts aussehen: wiederkehrende Formate, die zum Bienenjahr passen. Das hält den Feed lebendig, ohne dass dir die Ideen ausgehen.</p>
+      </div>
+      <div class="social">
+        <div class="post" style="background:#E8A300"><span class="tag">Reel · Mo</span>Schleudertag: Wabe rein, Honig raus</div>
+        <div class="post" style="background:#C98400"><span class="tag">Karussell · Mi</span>Woran erkennst du echten Imkerhonig?</div>
+        <div class="post" style="background:#93B585"><span class="tag">Story · täglich</span>Kurzer Blick in den Stock</div>
+        <div class="post" style="background:#FFF4D2;border:1px solid var(--line)"><span class="tag">Post · Fr</span>Rezept der Woche mit Waldhonig</div>
+      </div>
+      <div class="handles">
+        <span class="handle">Instagram · @summgold.honig</span>
+        <span class="handle">TikTok · @summgold</span>
+        <span class="handle">Facebook · Summgold Imkerei</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="marke">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Markenpaket</p>
+        <h2>Das Summgold-Design</h2>
+        <p class="lead">Logo, Farben, Schriften und Etikett. Das Zeichen verbindet die Wabe mit einem Honigtropfen und funktioniert auch klein als Profilbild oder Stempel.</p>
+      </div>
+      <div class="kit">
+        <div class="panel">
+          <h3>Logo</h3>
+          <div class="logos">
+            <div style="background:#E8A300;color:#23200F"><div style="display:grid;justify-items:center;gap:6px"><svg width="56" height="56" style="--mark-cut:#E8A300"><use href="#mark"/></svg><span style="font-family:var(--display);font-size:1.4rem">Summgold</span></div></div>
+            <div style="background:#23200F;color:#E8A300"><div style="display:grid;justify-items:center;gap:6px"><svg width="56" height="56" style="--mark-cut:#23200F"><use href="#mark"/></svg><span style="font-family:var(--display);font-size:1.4rem;color:#FFF4D2">Summgold</span></div></div>
+            <div style="background:#FFFDF6;color:#23200F;border:1px solid var(--line)"><svg width="64" height="64" style="--mark-cut:#FFFDF6"><use href="#mark"/></svg></div>
+            <div style="background:#FFF4D2;color:#23200F"><div style="width:76px;height:76px;border-radius:50%;background:#E8A300;display:grid;place-items:center"><svg width="44" height="44" style="--mark-cut:#E8A300"><use href="#mark"/></svg></div></div>
+          </div>
+          <p class="note" style="margin:0">Unten rechts: Profilbild für Instagram und TikTok.</p>
+        </div>
+        <div class="panel">
+          <h3>Farben</h3>
+          <div class="colors">
+            <div class="chip"><i style="background:#E8A300"></i>Honig<br>#E8A300</div>
+            <div class="chip"><i style="background:#C98400"></i>Waldhonig<br>#C98400</div>
+            <div class="chip"><i style="background:#23200F"></i>Beute<br>#23200F</div>
+            <div class="chip"><i style="background:#FFF4D2"></i>Wachs<br>#FFF4D2</div>
+            <div class="chip"><i style="background:#3E5C3A"></i>Linde<br>#3E5C3A</div>
+          </div>
+          <h3 style="margin-top:6px">Schriften</h3>
+          <div class="type-sample" style="display:grid;gap:6px">
+            <span class="d">Gloock</span>
+            <span class="b">Figtree für Texte, Beschreibungen und den Shop.</span>
+            <span class="u">IBM Plex Mono · Losnummer, Gewicht, MHD</span>
+          </div>
+          <p class="note" style="margin:0">Alle drei sind kostenlose Google Fonts und dürfen kommerziell genutzt werden.</p>
+        </div>
+        <div class="panel">
+          <h3>Glas-Etikett</h3>
+          <div class="label-wrap">
+            <div class="label">
+              <svg width="38" height="38" style="justify-self:center;color:#23200F;--mark-cut:#FFFDF6"><use href="#mark"/></svg>
+              <div class="nm">Summgold</div>
+              <div class="sort">Blütenhonig · cremig</div>
+              <div class="row"><span>500 g e</span><span>Honig aus Deutschland</span></div>
+              <div class="row"><span>MHD 09/2028</span><span>L 2026-03</span></div>
+              <div class="addr">Imkerei Summgold · Vorname Nachname<br>Straße 1 · 12345 Ort</div>
+            </div>
+          </div>
+          <p class="note" style="margin:0">Pflichtangaben nach Honigverordnung: Verkehrsbezeichnung, Füllmenge, Herkunftsland, MHD, Los-Nummer und Anschrift des Imkers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="namen">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Namen &amp; Domains</p>
+        <h2>Namensvorschläge</h2>
+        <p class="lead">Für keinen dieser Namen habe ich eine bestehende Imkerei oder Honigmarke gefunden. Ob die Domain wirklich frei ist, prüfst du in einer Minute auf denic.de oder bei deinem Hoster, bevor du sie registrierst.</p>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Name</th><th>Wirkung</th><th>Domain-Wunsch</th><th>Stand der Prüfung</th></tr></thead>
+          <tbody>
+            <tr><td class="nm">Summgold</td><td>Klang der Bienen plus Farbe des Honigs. Kurz, warm, gut als Hashtag.</td><td><code>summgold.de</code><br><code>summgold-honig.de</code></td><td><span class="pill pick">Empfehlung</span><br><span class="pill ok" style="margin-top:6px">kein Treffer im Web</span></td></tr>
+            <tr><td class="nm">Wabenwerk</td><td>Handwerklich, solide. Passt auch zu Kerzen und Wachsprodukten.</td><td><code>wabenwerk.de</code></td><td><span class="pill ok">kein Treffer im Web</span></td></tr>
+            <tr><td class="nm">Stockgold</td><td>Direkter Bezug zum Bienenstock, wirkt wertig.</td><td><code>stockgold.de</code></td><td><span class="pill warn">ähnlich: „Goldnote"</span></td></tr>
+            <tr><td class="nm">Wildwabe</td><td>Natürlich, etwas wild. Gut für eine jüngere Zielgruppe auf TikTok.</td><td><code>wildwabe.de</code></td><td><span class="pill ok">kein Treffer im Web</span></td></tr>
+            <tr><td class="nm">Honigmut</td><td>Persönlich, mit Haltung. Gut für Storytelling über die eigene Imkerei.</td><td><code>honigmut.de</code></td><td><span class="pill ok">kein Treffer im Web</span></td></tr>
+            <tr><td class="nm">Sonnwabe</td><td>Sonnig und regional, klingt nach Süddeutschland.</td><td><code>sonnwabe.de</code></td><td><span class="pill ok">kein Treffer im Web</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Tipp: Sichere dir gleichzeitig den Instagram- und TikTok-Namen und prüfe im DPMA-Register (register.dpma.de), ob es eine eingetragene Marke gibt.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Summgold Imkerei · Entwurf</span>
+    <span>Impressum · Datenschutz · Versand &amp; Zahlung · Widerruf</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const products=[
+  {name:"Frühtrachthonig",kind:"cremig gerührt",weight:"500 g",price:8.9,color:"#F3D27A",desc:"Mild und hell, aus Raps und Obstblüte. Streichzart aufs Brot."},
+  {name:"Sommertrachthonig",kind:"flüssig",weight:"500 g",price:9.5,color:"#E8A300",desc:"Linde und Klee. Blumig, bleibt lange flüssig, ideal für Tee."},
+  {name:"Waldhonig",kind:"flüssig",weight:"500 g",price:11.9,color:"#9C6100",desc:"Dunkel und würzig, aus dem Honigtau von Fichte und Tanne."},
+  {name:"Wabenhonig",kind:"im Stück",weight:"ca. 350 g",price:14.5,color:"#D99A1A",desc:"Direkt aus dem Rähmchen geschnitten. Honig, wie die Biene ihn baut."}
+];
+const fmt=n=>n.toLocaleString("de-DE",{style:"currency",currency:"EUR"});
+const grid=document.getElementById("products");
+let count=0;
+products.forEach((p,i)=>{
+  const el=document.createElement("article");
+  el.className="product";
+  el.innerHTML=`
+    <div class="swatch" style="background:${p.color}"><svg viewBox="0 0 64 64" style="color:#23200F;--mark-cut:${p.color}"><use href="#mark"/></svg></div>
+    <div><span class="meta">${p.kind} · ${p.weight}</span><h3>${p.name}</h3><p class="desc">${p.desc}</p></div>
+    <div class="buy"><span class="price">${fmt(p.price)}<small>inkl. MwSt., zzgl. Versand</small></span>
+    <button class="add" type="button" id="add-${i}">In den Warenkorb</button></div>`;
+  grid.appendChild(el);
+  el.querySelector("button").addEventListener("click",e=>{
+    count++;
+    document.getElementById("cart-count").textContent=count;
+    e.currentTarget.classList.add("done");
+    e.currentTarget.textContent="Hinzugefügt";
+    toast(`${p.name} im Warenkorb`);
+  });
+});
+document.getElementById("cart").addEventListener("click",()=>toast(count?`${count} Artikel im Warenkorb (Demo)`:"Dein Warenkorb ist leer"));
+let t;
+function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.hidden=false;clearTimeout(t);t=setTimeout(()=>el.hidden=true,2200)}
+</script>
