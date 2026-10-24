@@ -43,7 +43,7 @@ Eine längere Liste gibt es bei Feedspot: https://videos.feedspot.com/cafe_youtu
 Die Entwurfsseite `index.html` in diesem Ordner setzt das um:
 
 1. **Sprache: Deutsch.** Alle Texte der Seite sind auf Deutsch, die Stücknamen bleiben portugiesisch.
-2. **Eigener Name und eigener Stil.** Arbeitstitel ist „Saudade Café“. Die Gestaltung lehnt sich an die Plattencover des brasilianischen Labels Elenco (weiß, schwarz, rote Punkte) und an das Wellenpflaster von Copacabana an. Sie kopiert also nicht das Samt-und-Gold-Bild von Bossa Cafe Royale. Name und Farben lassen sich leicht ändern.
+2. **Eigener Name und eigener Stil.** Der Kanalname ist „Café Devagar“ (portugiesisch für „Café, ganz langsam“). Die Handles @cafedevagar waren am 24.10.2026 auf YouTube frei, auf Instagram und TikTok wurde kein Konto gefunden. @saudadecafe ist auf YouTube vergeben. Die Gestaltung lehnt sich an die Plattencover des brasilianischen Labels Elenco (weiß, schwarz, rote Punkte) und an das Wellenpflaster von Copacabana an. Sie kopiert also nicht das Samt-und-Gold-Bild von Bossa Cafe Royale. Name und Farben lassen sich leicht ändern.
 2. **Sessions nach Stimmung** (Morning, Study, Rainy, Evening, Sunday) mit Filter. So sortieren auch die großen Kanäle.
 3. **Kapitel / Tracklist** wie in YouTube-Videos.
 4. **Klangprobe im Browser:** eine kleine synthetische Gitarre spielt eine Bossa-Akkordfolge. Echte YouTube-Videos lassen sich in der Vorschau nicht einbetten. Auf der fertigen Website kannst du stattdessen deine eigenen Videos einbetten.
@@ -57,4 +57,4 @@ Die Entwurfsseite `index.html` in diesem Ordner setzt das um:
 - **Newsletter:** Das Formular speichert noch nichts. Es muss an einen Dienst angebunden werden (z. B. Brevo, MailerLite, Buttondown).
 - **Hosting:** kostenlos über GitHub Pages, Netlify oder Cloudflare Pages. Eine eigene Domain kostet ca. 10–15 € pro Jahr. Für normales Hosting sollte die Datei noch die üblichen Zeilen `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">` … bekommen.
 - **Musikrechte:** Nur eigene oder sauber lizenzierte Musik verwenden. Wer KI-Musik nutzt, muss das bei YouTube als „veränderte/synthetische Inhalte“ kennzeichnen, und Monetarisierung für massenhaft gleichförmige Inhalte ist eingeschränkt. Viele große Kanäle werben inzwischen gezielt mit „No AI“.
-- **Name prüfen:** Vor dem Start bei YouTube, Instagram, beim DPMA (Markenregister) und bei der Domain-Suche nachsehen, ob „Saudade Café“ oder dein Wunschname noch frei ist.
+- **Name prüfen:** Vor dem Start bei YouTube, Instagram, beim DPMA (Markenregister) und bei der Domain-Suche nachsehen, ob „Café Devagar“ als Marke oder Domain noch frei ist.

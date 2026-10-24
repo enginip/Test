@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Saudade Café – Testversion: erzeugt etwa eine Stunde instrumentale Bossa Nova.
+"""Café Devagar – Testversion: erzeugt etwa eine Stunde instrumentale Bossa Nova.
 
 Alle Klänge werden hier berechnet (Karplus-Strong-Nylongitarre, Kontrabass,
 FM-E-Piano, Flöte, Vibraphon, Besen, Rimshot, Bassdrum). Es werden keine Samples
@@ -550,13 +550,13 @@ def main():
     with open(os.path.join(tmp, "liste.txt"), "w") as f:
         f.writelines(f"file '{os.path.abspath(p)}'\n" for p in files)
     with open(os.path.join(tmp, "meta.txt"), "w") as f:
-        f.write(";FFMETADATA1\ntitle=Manhã de Café (Testversion)\nartist=Saudade Café\nalbum=Saudade Café Vol. 01\n")
+        f.write(";FFMETADATA1\ntitle=Manhã de Café (Testversion)\nartist=Café Devagar\nalbum=Café Devagar Vol. 01\n")
         for a, b, name in chapters:
             f.write(f"[CHAPTER]\nTIMEBASE=1/1000\nSTART={int(a * 1000)}\nEND={int(b * 1000)}\ntitle={name}\n")
     with open(os.path.join(args.out, "kapitel-youtube.txt"), "w") as f:
         f.writelines(f"{fmt(a)} {name}\n" for a, _, name in chapters)
 
-    mp3 = os.path.join(args.out, "saudade-cafe-manha-de-cafe-testversion.mp3")
+    mp3 = os.path.join(args.out, "cafe-devagar-manha-de-cafe-testversion.mp3")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0",
                     "-i", os.path.join(tmp, "liste.txt"), "-i", os.path.join(tmp, "meta.txt"),
                     "-map", "0:a", "-map_metadata", "1", "-map_chapters", "1",
