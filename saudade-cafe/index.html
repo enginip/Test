@@ -1,6 +1,6 @@
 <title>Saudade Café</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Saudade Café – instrumental bossa nova for slow mornings, focused work and quiet evenings.">
+<meta name="description" content="Saudade Café – instrumentale Bossa Nova für langsame Morgen, konzentriertes Arbeiten und ruhige Abende.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Libre+Franklin:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
@@ -24,10 +24,10 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65;hyphens:auto;-webkit-hyphens:auto}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
 .wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.98;letter-spacing:-.02em;text-wrap:balance;margin:0;text-transform:lowercase}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.98;letter-spacing:-.02em;text-wrap:balance;margin:0;text-transform:lowercase;hyphens:manual}
 h2{font-size:clamp(2.2rem,5vw,3.6rem)}
 h3{font-size:1.35rem;font-weight:700;letter-spacing:-.01em;line-height:1.15}
 p{margin:0}
@@ -52,19 +52,19 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:col
 .nav ul a{text-decoration:none;color:var(--muted)}
 .nav ul a:hover{color:var(--ink)}
 .nav .btn{padding:9px 18px;font-size:.9rem}
-@media (max-width:860px){.nav ul{display:none}}
+@media (max-width:900px){.nav ul{display:none}}
 
 /* Hero */
 .hero{padding-block:clamp(40px,6vw,72px) clamp(56px,8vw,96px)}
 .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,5vw,64px);align-items:center}
-.hero h1{font-size:clamp(3rem,8.4vw,6.4rem)}
+.hero h1{font-size:clamp(2.8rem,7.6vw,5.8rem)}
 .hero-copy{display:grid;gap:26px;min-width:0}
 .hero-copy .lead{font-size:1.2rem}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
 .hero-meta{display:flex;flex-wrap:wrap;gap:8px 22px;font:400 .85rem var(--mono);color:var(--muted)}
 @media (max-width:880px){.hero .wrap{grid-template-columns:1fr}}
 
-/* Album-style player */
+/* Player im Plattencover-Stil */
 .record{background:var(--sheet);border:1px solid var(--line);padding:clamp(18px,3vw,28px);display:grid;gap:20px;min-width:0}
 .cover{position:relative;aspect-ratio:1/1;max-width:100%;background:var(--ink);overflow:hidden}
 .cover canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -81,7 +81,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:col
 .chords span.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .note{font-size:.82rem;color:var(--muted)}
 
-/* Copacabana band */
+/* Copacabana-Band */
 .waves{height:64px;background:var(--ink);color:var(--paper)}
 .waves svg{display:block;width:100%;height:100%}
 
@@ -101,7 +101,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:col
 .card .label{font-size:.72rem}
 .example{margin-top:28px;font-size:.88rem;color:var(--muted)}
 
-/* Chapters */
+/* Kapitel */
 .chapters{background:var(--sand)}
 .chap-wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(32px,6vw,80px);align-items:start}
 @media (max-width:860px){.chap-wrap{grid-template-columns:1fr}}
@@ -111,14 +111,14 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:col
 .tracklist span{font-weight:500;min-width:0}
 .tracklist em{font:400 .8rem var(--mono);font-style:normal;color:var(--muted);text-align:right}
 
-/* Room */
+/* Der Raum */
 .room-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 @media (max-width:860px){.room-grid{grid-template-columns:1fr}}
 .room-grid article{display:grid;gap:12px;align-content:start;border-top:1.5px solid var(--ink);padding-top:20px}
 .room-grid .big{font:800 3rem/1 var(--display);letter-spacing:-.03em}
 .room-grid p{color:var(--muted)}
 
-/* Business */
+/* Für Cafés */
 .biz{background:var(--ocean);color:var(--on-dark)}
 .biz .label,.biz .lead{color:color-mix(in srgb,var(--on-dark) 75%,transparent)}
 .biz-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
@@ -128,12 +128,12 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:col
 .biz .btn{border-color:var(--on-dark);color:var(--on-dark);margin-top:36px}
 .biz .btn:hover{background:var(--on-dark);color:#0E4B5A}
 
-/* Listen */
+/* Hören */
 .listen{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,72px);align-items:start}
 @media (max-width:860px){.listen{grid-template-columns:1fr}}
 .platforms{display:grid;gap:0;border-top:1.5px solid var(--ink)}
 .platforms a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);text-decoration:none;font:700 1.3rem var(--display);text-transform:lowercase;letter-spacing:-.01em}
-.platforms a span{font:400 .82rem var(--mono);color:var(--muted);text-transform:none;letter-spacing:0}
+.platforms a span{font:400 .82rem var(--mono);color:var(--muted);text-transform:none;letter-spacing:0;text-align:right}
 .platforms a:hover{color:var(--dot-ink)}
 form{display:grid;gap:14px;background:var(--sheet);border:1px solid var(--line);padding:clamp(20px,3vw,32px)}
 form label{font-weight:600;font-size:.95rem}
@@ -156,12 +156,12 @@ footer .wrap{display:grid;gap:28px}
     <a class="brand" href="#top" aria-label="Saudade Café, zur Startseite">saudade café<i class="dotmark"></i></a>
     <ul>
       <li><a href="#sessions">Sessions</a></li>
-      <li><a href="#chapters">Tracklist</a></li>
-      <li><a href="#room">The room</a></li>
-      <li><a href="#business">For cafés</a></li>
-      <li><a href="#listen">Listen</a></li>
+      <li><a href="#chapters">Titelliste</a></li>
+      <li><a href="#room">Das Café</a></li>
+      <li><a href="#business">Für Cafés</a></li>
+      <li><a href="#listen">Hören</a></li>
     </ul>
-    <a class="btn btn-solid" href="https://www.youtube.com/" target="_blank" rel="noopener">Subscribe</a>
+    <a class="btn btn-solid" href="https://www.youtube.com/" target="_blank" rel="noopener">Abonnieren</a>
   </div>
 </header>
 
@@ -169,37 +169,37 @@ footer .wrap{display:grid;gap:28px}
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <span class="label">Instrumental bossa nova · new session every week</span>
-        <h1>slow coffee, soft guitar<span class="dotmark"></span></h1>
-        <p class="lead">Nylon-string guitar, brushed drums and a little Rhodes piano. Long, calm sessions for the first cup of the morning, for focused work, and for the hour when the light turns gold.</p>
+        <span class="label">Instrumentale Bossa Nova · jede Woche eine neue Session</span>
+        <h1>langsamer kaffee, sanfte gitarre<span class="dotmark"></span></h1>
+        <p class="lead">Nylonsaiten, Besen am Schlagzeug und ein wenig Rhodes-Piano. Lange, ruhige Sessions für die erste Tasse am Morgen, für konzentriertes Arbeiten und für die Stunde, in der das Licht golden wird.</p>
         <div class="hero-actions">
           <a class="btn btn-solid" href="#sessions">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            Browse sessions
+            Sessions ansehen
           </a>
-          <a class="btn" href="#listen">Listen on Spotify</a>
+          <a class="btn" href="#listen">Auf Spotify hören</a>
         </div>
         <div class="hero-meta">
-          <span>~2 h per session</span><span>no vocals</span><span>no mid-roll ads</span>
+          <span>ca. 2 Std. pro Session</span><span>ohne Gesang</span><span>ohne Werbung mittendrin</span>
         </div>
       </div>
 
-      <div class="record" aria-label="Sound preview">
+      <div class="record" aria-label="Hörprobe">
         <div class="cover">
           <canvas id="cover" aria-hidden="true"></canvas>
-          <div class="title"><small>Vol. 01 · Rio, 7 a.m.</small>manhã de café</div>
+          <div class="title"><small>Vol. 01 · Rio, 7 Uhr morgens</small>manhã de café</div>
         </div>
         <div class="player">
-          <button class="play" id="play" type="button" aria-label="Play a short sound preview">
+          <button class="play" id="play" type="button" aria-label="Kurze Hörprobe abspielen">
             <svg id="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
             <svg id="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
           </button>
           <div class="now">
-            <b id="now-label">Hear the ii–V–I that runs through every session</b>
+            <b id="now-label">Hör die II–V–I-Folge, die durch jede Session zieht</b>
             <div class="chords" id="chords"><span>Dm9</span><span>G13</span><span>Cmaj9</span><span>A7♭9</span></div>
           </div>
         </div>
-        <p class="note">Synthesised live in your browser as a taste of the sound. The real sessions are on YouTube.</p>
+        <p class="note">Wird live in deinem Browser erzeugt, als kleiner Vorgeschmack auf den Klang. Die echten Sessions gibt es auf YouTube.</p>
       </div>
     </div>
   </section>
@@ -219,21 +219,21 @@ footer .wrap{display:grid;gap:28px}
     <div class="wrap">
       <div class="sec-head">
         <span class="label">Sessions</span>
-        <h2>pick a mood</h2>
-        <p class="lead">Every session is a single, unbroken mix. Choose by the time of day or by what you are about to do.</p>
+        <h2>wähl deine stimmung</h2>
+        <p class="lead">Jede Session ist ein durchgehender Mix ohne Unterbrechung. Such dir eine nach Tageszeit aus oder danach, was du gerade vorhast.</p>
       </div>
-      <div class="filters" role="group" aria-label="Filter sessions by mood" id="filters"></div>
+      <div class="filters" role="group" aria-label="Sessions nach Stimmung filtern" id="filters"></div>
       <div class="grid" id="grid"></div>
-      <p class="example">Example sessions. Replace titles, lengths and links with your own uploads.</p>
+      <p class="example">Beispiel-Sessions. Titel, Längen und Links durch deine eigenen Videos ersetzen.</p>
     </div>
   </section>
 
   <section class="chapters" id="chapters">
     <div class="wrap chap-wrap">
       <div class="sec-head">
-        <span class="label">Inside a session</span>
-        <h2>manhã de café, chapter by chapter</h2>
-        <p class="lead">Each video comes with YouTube chapters, so you can jump straight to the slower tracks or the brighter ones. Tempos stay between 118 and 136 BPM, the classic walking pace of bossa nova.</p>
+        <span class="label">Einblick in eine Session</span>
+        <h2>manhã de café, kapitel für kapitel</h2>
+        <p class="lead">Jedes Video hat YouTube-Kapitel. So springst du direkt zu den ruhigeren oder den helleren Stücken. Das Tempo bleibt zwischen 118 und 136 BPM, dem klassischen Schritttempo der Bossa Nova.</p>
       </div>
       <ol class="tracklist">
         <li><time>00:00</time><span>Primeiro Café</span><em>Dmaj9 · 124</em></li>
@@ -242,7 +242,7 @@ footer .wrap{display:grid;gap:28px}
         <li><time>13:05</time><span>Leme ao Meio-Dia</span><em>Cm9 · 120</em></li>
         <li><time>17:38</time><span>Bonde de Santa Teresa</span><em>A♭maj7 · 136</em></li>
         <li><time>22:10</time><span>Pão de Queijo</span><em>Em7 · 126</em></li>
-        <li><time>26:54</time><span>Devagarinho</span><em>Bbmaj9 · 118</em></li>
+        <li><time>26:54</time><span>Devagarinho</span><em>B♭maj9 · 118</em></li>
         <li><time>31:20</time><span>Até Logo, Ipanema</span><em>Dmaj9 · 124</em></li>
       </ol>
     </div>
@@ -251,25 +251,25 @@ footer .wrap{display:grid;gap:28px}
   <section id="room">
     <div class="wrap">
       <div class="sec-head">
-        <span class="label">The room</span>
-        <h2>a corner café that never closes</h2>
-        <p class="lead">Picture a small café a few streets back from the beach. Tiled floor, a fan turning slowly, an espresso machine hissing somewhere behind you. That is the room every session is recorded for.</p>
+        <span class="label">Das Café</span>
+        <h2>ein eckcafé, das nie schließt</h2>
+        <p class="lead">Stell dir ein kleines Café vor, ein paar Straßen hinter dem Strand. Fliesenboden, ein Ventilator, der sich langsam dreht, irgendwo hinter dir zischt die Espressomaschine. Für diesen Raum entsteht jede Session.</p>
       </div>
       <div class="room-grid">
         <article>
           <span class="big">6</span>
-          <h3>strings, nylon only</h3>
-          <p>The guitar carries every track. Piano, flute and vibraphone join in, but they never crowd it.</p>
+          <h3>saiten, nur nylon</h3>
+          <p>Die Gitarre trägt jedes Stück. Klavier, Flöte und Vibraphon kommen dazu, drängen sich aber nie nach vorn.</p>
         </article>
         <article>
           <span class="big">0</span>
-          <h3>lyrics to distract you</h3>
-          <p>Fully instrumental, so it works under reading, writing, coding and conversation.</p>
+          <h3>texte, die ablenken</h3>
+          <p>Rein instrumental. Passt deshalb zum Lesen, Schreiben, Programmieren und zu Gesprächen.</p>
         </article>
         <article>
-          <span class="big">2 h</span>
-          <h3>of uninterrupted flow</h3>
-          <p>Long enough for two pomodoro blocks or one slow Sunday breakfast, with gentle transitions between tracks.</p>
+          <span class="big">2 Std.</span>
+          <h3>ununterbrochener fluss</h3>
+          <p>Lang genug für zwei Pomodoro-Blöcke oder ein gemütliches Sonntagsfrühstück, mit sanften Übergängen zwischen den Stücken.</p>
         </article>
       </div>
     </div>
@@ -278,52 +278,52 @@ footer .wrap{display:grid;gap:28px}
   <section class="biz" id="business">
     <div class="wrap">
       <div class="sec-head">
-        <span class="label">For cafés, shops and studios</span>
-        <h2>play it in your space</h2>
-        <p class="lead">Want this sound in your café, bakery, salon or hotel lobby? We license the full catalogue for public playback.</p>
+        <span class="label">Für Cafés, Läden und Studios</span>
+        <h2>spiel es in deinem laden</h2>
+        <p class="lead">Du möchtest diesen Klang in deinem Café, deiner Bäckerei, deinem Salon oder deiner Hotellobby? Wir lizenzieren den ganzen Katalog für die öffentliche Wiedergabe.</p>
       </div>
       <div class="biz-grid">
         <article>
-          <span class="label">One location</span>
-          <h3>Café licence</h3>
-          <p>Ad-free long mixes for a single venue, cleared for background playback during opening hours.</p>
+          <span class="label">Ein Standort</span>
+          <h3>Café-Lizenz</h3>
+          <p>Lange Mixe ohne Werbung für einen Standort, freigegeben als Hintergrundmusik während der Öffnungszeiten.</p>
         </article>
         <article>
-          <span class="label">Several locations</span>
-          <h3>Chain licence</h3>
-          <p>One agreement for all your branches, with seasonal playlists updated every quarter.</p>
+          <span class="label">Mehrere Standorte</span>
+          <h3>Filial-Lizenz</h3>
+          <p>Ein Vertrag für alle Filialen, mit saisonalen Playlists, die jedes Quartal aktualisiert werden.</p>
         </article>
         <article>
-          <span class="label">Video & content</span>
-          <h3>Creator licence</h3>
-          <p>Use individual tracks under vlogs, podcasts and ads. Includes a written licence certificate.</p>
+          <span class="label">Video & Content</span>
+          <h3>Creator-Lizenz</h3>
+          <p>Einzelne Stücke für Vlogs, Podcasts und Werbung nutzen. Mit schriftlichem Lizenzzertifikat.</p>
         </article>
       </div>
-      <a class="btn" href="#listen">Ask about a licence</a>
+      <a class="btn" href="#listen">Lizenz anfragen</a>
     </div>
   </section>
 
   <section id="listen">
     <div class="wrap listen">
       <div class="sec-head" style="margin-bottom:0">
-        <span class="label">Listen everywhere</span>
-        <h2>take it with you</h2>
+        <span class="label">Überall hören</span>
+        <h2>nimm es mit</h2>
         <div class="platforms">
-          <a href="https://www.youtube.com/" target="_blank" rel="noopener">youtube <span>full sessions & live radio</span></a>
-          <a href="https://open.spotify.com/" target="_blank" rel="noopener">spotify <span>albums & playlists</span></a>
-          <a href="https://music.apple.com/" target="_blank" rel="noopener">apple music <span>albums</span></a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener">instagram <span>new uploads & café photos</span></a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener">youtube <span>ganze Sessions & Live-Radio</span></a>
+          <a href="https://open.spotify.com/" target="_blank" rel="noopener">spotify <span>Alben & Playlists</span></a>
+          <a href="https://music.apple.com/" target="_blank" rel="noopener">apple music <span>Alben</span></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener">instagram <span>neue Videos & Café-Fotos</span></a>
         </div>
       </div>
       <form id="news" novalidate>
-        <span class="label">Letter from the café</span>
-        <h3>one email when a new session is out</h3>
-        <label for="email">Your email address</label>
+        <span class="label">Post aus dem Café</span>
+        <h3>eine e-mail, wenn eine neue session erscheint</h3>
+        <label for="email">Deine E-Mail-Adresse</label>
         <div class="field">
-          <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
-          <button class="btn btn-solid" type="submit">Sign up</button>
+          <input type="email" id="email" name="email" placeholder="du@beispiel.de" autocomplete="email" required>
+          <button class="btn btn-solid" type="submit">Anmelden</button>
         </div>
-        <p class="form-msg" id="form-msg" aria-live="polite">About twice a month. Unsubscribe with one click.</p>
+        <p class="form-msg" id="form-msg" aria-live="polite">Etwa zweimal im Monat. Abmelden mit einem Klick.</p>
       </form>
     </div>
   </section>
@@ -333,7 +333,7 @@ footer .wrap{display:grid;gap:28px}
   <div class="wrap">
     <div class="foot-top">
       <span class="brand">saudade café<i class="dotmark"></i></span>
-      <span>Original music, recorded for slow mornings. © 2026</span>
+      <span>Eigene Musik, aufgenommen für langsame Morgen. © 2026</span>
     </div>
     <div class="legal" id="impressum">
       <div>
@@ -351,12 +351,12 @@ footer .wrap{display:grid;gap:28px}
 <script>
 /* Sessions (Beispieldaten – durch eigene Uploads ersetzen) */
 const sessions = [
-  {title:"Morning Bossa at the Window · Soft Guitar & Coffee for Slow Starts", mood:"Morning", dur:"2:03:12", bg:"#E8E0CF", dots:["#D2282F","#131517"], layout:0},
-  {title:"Deep Work Bossa · Two Hours of Nylon Guitar for Focus", mood:"Study", dur:"2:00:08", bg:"#131517", dots:["#F5F5F2","#D2282F"], layout:1},
-  {title:"Rainy Afternoon Café · Bossa Nova & Light Rain for Reading", mood:"Rainy", dur:"3:00:45", bg:"#0E4B5A", dots:["#F5F5F2","#9CC3CC"], layout:2},
-  {title:"Ipanema Dusk · Evening Bossa with Brushed Drums", mood:"Evening", dur:"1:48:30", bg:"#D2282F", dots:["#131517","#F5F5F2"], layout:3},
-  {title:"Sunday Brunch Bossa · Flute, Piano & Open Windows", mood:"Sunday", dur:"2:14:02", bg:"#F5F5F2", dots:["#0E4B5A","#D2282F"], layout:4},
-  {title:"Late Lamp Café · Quiet Bossa for Night Study", mood:"Study", dur:"2:31:19", bg:"#1F2A2E", dots:["#E8B04A","#F5F5F2"], layout:5}
+  {title:"Bossa am Morgenfenster · Sanfte Gitarre & Kaffee für einen ruhigen Start", mood:"Morgen", dur:"2:03:12", bg:"#E8E0CF", dots:["#D2282F","#131517"], layout:0},
+  {title:"Deep Work Bossa · Zwei Stunden Nylongitarre zum Konzentrieren", mood:"Fokus", dur:"2:00:08", bg:"#131517", dots:["#F5F5F2","#D2282F"], layout:1},
+  {title:"Regennachmittag im Café · Bossa Nova & leiser Regen zum Lesen", mood:"Regen", dur:"3:00:45", bg:"#0E4B5A", dots:["#F5F5F2","#9CC3CC"], layout:2},
+  {title:"Dämmerung in Ipanema · Abend-Bossa mit Besen am Schlagzeug", mood:"Abend", dur:"1:48:30", bg:"#D2282F", dots:["#131517","#F5F5F2"], layout:3},
+  {title:"Sonntagsbrunch-Bossa · Flöte, Klavier & offene Fenster", mood:"Sonntag", dur:"2:14:02", bg:"#F5F5F2", dots:["#0E4B5A","#D2282F"], layout:4},
+  {title:"Café bei Lampenlicht · Leise Bossa zum Lernen am Abend", mood:"Fokus", dur:"2:31:19", bg:"#1F2A2E", dots:["#E8B04A","#F5F5F2"], layout:5}
 ];
 const layouts = [
   [[70,45,26,0],[118,72,12,1],[34,96,8,1]],
@@ -366,7 +366,7 @@ const layouts = [
   [[30,30,14,1],[60,60,14,0],[90,90,14,1],[150,40,22,0]],
   [[140,50,30,0],[60,30,5,1],[40,70,4,1],[90,90,3,1]]
 ];
-const moods = ["All","Morning","Study","Rainy","Evening","Sunday"];
+const moods = ["Alle","Morgen","Fokus","Regen","Abend","Sonntag"];
 const grid = document.getElementById("grid"), filters = document.getElementById("filters");
 
 function thumb(s){
@@ -374,16 +374,16 @@ function thumb(s){
   return `<svg viewBox="0 0 192 108" aria-hidden="true"><rect width="192" height="108" fill="${s.bg}"/>${circles}</svg>`;
 }
 function render(mood){
-  grid.innerHTML = sessions.filter(s => mood === "All" || s.mood === mood).map(s => `
+  grid.innerHTML = sessions.filter(s => mood === "Alle" || s.mood === mood).map(s => `
     <a class="card" href="https://www.youtube.com/" target="_blank" rel="noopener">
       <div class="thumb">${thumb(s)}<span class="dur">${s.dur}</span></div>
       <span class="label">${s.mood}</span>
       <h3>${s.title}</h3>
     </a>`).join("");
 }
-let saved = "All";
-try { saved = localStorage.getItem("mood") || "All"; } catch(e) {}
-if (!moods.includes(saved)) saved = "All";
+let saved = "Alle";
+try { saved = localStorage.getItem("mood") || "Alle"; } catch(e) {}
+if (!moods.includes(saved)) saved = "Alle";
 filters.innerHTML = moods.map(m => `<button class="chip" type="button" aria-pressed="${m === saved}">${m}</button>`).join("");
 filters.addEventListener("click", e => {
   const b = e.target.closest(".chip"); if (!b) return;
@@ -411,7 +411,7 @@ function drawCover(){
 drawCover();
 new ResizeObserver(drawCover).observe(cv);
 
-/* Klangprobe: Karplus-Strong-Gitarre spielt ii–V–I mit Bossa-Rhythmus */
+/* Klangprobe: Karplus-Strong-Gitarre spielt II–V–I mit Bossa-Rhythmus */
 const chordNotes = [[50,53,57,60,64],[43,53,59,64,69],[48,52,55,59,62],[45,55,58,61,64]];
 const bassNotes = [[38,45],[31,38],[36,43],[33,40]];
 const comp = [1,0,0,1,0,0,1,0, 0,0,1,0,0,1,0,0];   // Gitarre (Achtel über 2 Takte)
@@ -464,12 +464,12 @@ btn.addEventListener("click", async () => {
   if (!playing){
     await ac.resume(); playing = true; nextT = ac.currentTime + .08; step = 0;
     timer = setInterval(schedule, 60);
-    ip.hidden = true; ipause.hidden = false; btn.setAttribute("aria-label","Pause the sound preview");
-    nowLabel.textContent = "Now playing: Manhã de Café (preview)";
+    ip.hidden = true; ipause.hidden = false; btn.setAttribute("aria-label","Hörprobe pausieren");
+    nowLabel.textContent = "Läuft gerade: Manhã de Café (Hörprobe)";
   } else {
     playing = false; clearInterval(timer); ac.suspend();
-    ip.hidden = false; ipause.hidden = true; btn.setAttribute("aria-label","Play a short sound preview");
-    nowLabel.textContent = "Paused. Tap play to continue.";
+    ip.hidden = false; ipause.hidden = true; btn.setAttribute("aria-label","Kurze Hörprobe abspielen");
+    nowLabel.textContent = "Pausiert. Tippe auf Play, um weiterzuhören.";
     chordEls.forEach(e => e.classList.remove("on"));
   }
 });
@@ -478,7 +478,7 @@ btn.addEventListener("click", async () => {
 document.getElementById("news").addEventListener("submit", e => {
   e.preventDefault();
   const email = document.getElementById("email"), msg = document.getElementById("form-msg");
-  if (!email.value || !email.checkValidity()){ msg.textContent = "Please enter a full email address, like you@example.com."; email.focus(); return; }
-  msg.textContent = "Saved on this preview only. Connect a newsletter service before launch so sign-ups are actually stored.";
+  if (!email.value || !email.checkValidity()){ msg.textContent = "Bitte gib eine vollständige E-Mail-Adresse ein, z. B. du@beispiel.de."; email.focus(); return; }
+  msg.textContent = "Nur in dieser Vorschau vermerkt. Vor dem Livegang einen Newsletter-Dienst anbinden, damit Anmeldungen wirklich gespeichert werden.";
 });
 </script>
