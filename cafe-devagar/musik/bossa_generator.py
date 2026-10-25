@@ -44,6 +44,11 @@ PROGS = {
           (2, "m7b5"), (7, "7b9"), (0, "m9"), (0, "m9"), (5, "m9"), (10, "13"), (3, "maj7"), (7, "7b9")],
 }
 
+# Sanfter Modus (--sanft): langsamer, dunkle ausklingende Gitarre, warme Fläche, kein Rimshot/Bassdrum
+SOFT = False
+SOFT_COMP = [[0, 3, 6, 10, 13], [0, 6, 8, 14], [0, 3, 8, 11]]
+SOFT_INST = {"flute": "rhodes"}
+
 MAJOR = [0, 2, 4, 5, 7, 9, 11]
 MINOR = [0, 2, 3, 5, 7, 8, 10]
 
@@ -164,10 +169,11 @@ def rhodes(midi, dur, vel, rng):
     f = hz(midi)
     n = int((dur + 0.35) * SR)
     t = np.arange(n) / SR
-    idx = (0.6 + 1.2 * vel) * np.exp(-t * 3.5) + 0.12
+    idx = ((0.25 + 0.45 * vel) if SOFT else (0.6 + 1.2 * vel)) * np.exp(-t * 3.5) + 0.08
     env = np.exp(-t * 1.1) * np.minimum(1, t / 0.003)
     y = np.sin(2 * np.pi * f * t + idx * np.sin(2 * np.pi * f * t)) * env
-    y += 0.06 * vel * np.sin(2 * np.pi * f * 7.1 * t) * np.exp(-t * 25)
+    if not SOFT:
+        y += 0.06 * vel * np.sin(2 * np.pi * f * 7.1 * t) * np.exp(-t * 25)
     rel = int(dur * SR)
     if rel < n:
         y[rel:] *= np.linspace(1, 0, n - rel)
@@ -182,8 +188,9 @@ def vibes(midi, dur, vel, rng):
          + 0.22 * np.sin(2 * np.pi * 3.98 * f * t) * np.exp(-t * 3.5)
          + 0.06 * np.sin(2 * np.pi * 9.9 * f * t) * np.exp(-t * 9))
     y *= 1 - 0.22 * (0.5 + 0.5 * np.sin(2 * np.pi * 5.2 * t))
-    y += rng.uniform(-1, 1, n) * np.exp(-t * 900) * 0.12
-    y *= np.minimum(1, t / 0.002)
+    if not SOFT:
+        y += rng.uniform(-1, 1, n) * np.exp(-t * 900) * 0.12
+    y *= np.minimum(1, t / (0.012 if SOFT else 0.002))
     rel = int(dur * SR)
     if rel < n:
         y[rel:] *= np.linspace(1, 0, n - rel)
@@ -205,6 +212,22 @@ def flute(midi, dur, vel, rng):
     if rel < n:
         env[rel:] *= np.linspace(1, 0, n - rel)
     return y * env * (0.7 + 0.3 * vel)
+
+
+def pad_note(midi, dur):
+    """Warme Fläche: zwei leicht verstimmte weiche Oszillatoren, langsamer Ein- und Ausklang."""
+    f = hz(midi)
+    n = int((dur + 1.2) * SR)
+    t = np.arange(n) / SR
+    y = np.zeros(n)
+    for det in (-0.0018, 0.0018):
+        ph = 2 * np.pi * f * (1 + det) * t
+        y += np.sin(ph) + 0.18 * np.sin(2 * ph) + 0.05 * np.sin(3 * ph)
+    env = np.clip(t / 0.7, 0, 1)
+    rel = int(dur * SR)
+    if rel < n:
+        env[rel:] *= np.linspace(1, 0, n - rel)
+    return y * env * 0.5
 
 
 SYNTHS = {"flute": flute, "rhodes": rhodes, "vibes": vibes}
@@ -326,6 +349,8 @@ def place(bus, t, sig, gain):
 
 
 def plan_sections(loops):
+    if loops < 4:
+        return ["head"] + ["solo"] * max(loops - 2, 0) + ["head2"]
     n_mid = loops - 4
     mid = ["solo"] * n_mid
     if n_mid >= 3:
@@ -339,6 +364,11 @@ def track_seconds(bpm, loops, gap):
 
 def render_track(spec, loops, seed, guitar, gap=1.5):
     name, bpm, key, mode, prog_id, inst1, inst2, light = spec
+    if SOFT:
+        bpm = max(88, round(bpm * 0.85))
+        inst1, inst2 = SOFT_INST.get(inst1, inst1), SOFT_INST.get(inst2, inst2)
+        if inst1 == inst2:
+            inst2 = "vibes" if inst1 == "rhodes" else "rhodes"
     rng = np.random.default_rng(seed)
     st = 60 / bpm / 2
     bar_t = 8 * st
@@ -354,7 +384,7 @@ def render_track(spec, loops, seed, guitar, gap=1.5):
     end_t = n_bars * bar_t
     total = end_t + 6.5 + gap
     N = int(total * SR)
-    buses = {k: np.zeros(N, np.float32) for k in ("gtr", "bass", "mel", "mel2", "rim", "brush", "kick")}
+    buses = {k: np.zeros(N, np.float32) for k in ("gtr", "bass", "mel", "mel2", "rim", "brush", "kick", "pad")}
     rims, brushes, kick = drum_kit(rng)
 
     # Gitarre: Stimmführung über alle Takte
@@ -367,7 +397,7 @@ def render_track(spec, loops, seed, guitar, gap=1.5):
 
     hits = []
     for b0 in range(0, n_bars, 2):
-        pat = COMP[rng.choice(len(COMP), p=COMP_W)]
+        pat = SOFT_COMP[rng.integers(len(SOFT_COMP))] if SOFT else COMP[rng.choice(len(COMP), p=COMP_W)]
         for s in pat:
             bar = b0 + s // 8
             if bar >= n_bars:
@@ -378,13 +408,20 @@ def render_track(spec, loops, seed, guitar, gap=1.5):
     hits.sort()
     for i, (t, vb, acc) in enumerate(hits):
         nxt = hits[i + 1][0] if i + 1 < len(hits) else end_t
-        dur = nxt - t + 0.02
+        dur = max(nxt - t + 0.02, 1.4) if SOFT else nxt - t + 0.02
         vel = (1.0 if acc else 0.8) * (0.85 + 0.3 * rng.random())
         t += rng.normal(0, 0.005)
         for j, m in enumerate(voic[vb]):
-            sig = guitar.note(m, int(rng.integers(4)) | (1 if acc else 0))
+            variant = 2 * int(rng.integers(2)) if SOFT else int(rng.integers(4)) | (1 if acc else 0)
+            sig = guitar.note(m, variant)
             n = min(len(sig), int(dur * SR))
-            place(buses["gtr"], t + j * 0.007, fade_out(sig[:n].copy(), int(0.025 * SR)), 0.45 * vel)
+            fade = int((0.3 if SOFT else 0.025) * SR)
+            place(buses["gtr"], t + j * (0.02 if SOFT else 0.007), fade_out(sig[:n].copy(), fade), (0.4 if SOFT else 0.45) * vel)
+
+    if SOFT:
+        for bi, v in enumerate(voic):
+            for m in v:
+                place(buses["pad"], bi * bar_t, pad_note(m - 12 if m > 64 else m, bar_t + 0.3), 0.025)
 
     # Bass und Schlagzeug
     bass_ev = []
@@ -397,23 +434,25 @@ def render_track(spec, loops, seed, guitar, gap=1.5):
         nr = 36 + (nroot - 36) % 12
         approach = nr + (1 if rng.random() < 0.5 else -1) if rng.random() < 0.3 else nr
         pattern = [(0, r, 1.0), (3, fifth, 0.55), (4, fifth, 0.8), (7, approach, 0.5)]
-        if rng.random() < 0.2:
+        if SOFT:
+            pattern = [(0, r, 0.9), (4, fifth, 0.6)]
+        elif rng.random() < 0.2:
             pattern.pop(1)
         for s, m, v in pattern:
             bass_ev.append(((bi * 8 + s) * st, m, v))
     bass_ev.append((end_t, 36 + (key - 36) % 12, 1.0))
     for i, (t, m, v) in enumerate(bass_ev):
         nxt = bass_ev[i + 1][0] if i + 1 < len(bass_ev) else t + 3.5
-        place(buses["bass"], t + rng.normal(0, 0.004), bass_note(m, nxt - t), 0.22 * v)
+        place(buses["bass"], t + rng.normal(0, 0.004), bass_note(m, nxt - t), (0.17 if SOFT else 0.22) * v)
 
     for bi, (_, sec, inb) in enumerate(bars):
         t0 = bi * bar_t
-        full = sec in ("head", "head2", "solo") and not light
+        full = sec in ("head", "head2", "solo") and not light and not SOFT
         for s in range(8):
-            for half, g in ((0, 0.9 if s % 2 else 0.6), (0.5, 0.35)):
+            for half, g in (((0, 0.5 if s % 2 else 0.3),) if SOFT else ((0, 0.9 if s % 2 else 0.6), (0.5, 0.35))):
                 gain = 0.15 * g * (0.6 if sec == "break" or light else 1.0)
                 place(buses["brush"], t0 + (s + half) * st + rng.normal(0, 0.004), brushes[rng.integers(3)], gain)
-        if full or sec == "break":
+        if full or (sec == "break" and not SOFT):
             for s, g in ((0, 0.1), (3, 0.045), (4, 0.08), (7, 0.035)):
                 place(buses["kick"], t0 + s * st, kick, g)
         if full:
@@ -438,20 +477,20 @@ def render_track(spec, loops, seed, guitar, gap=1.5):
         elif sec == "solo":
             inst = inst2 if solo_count % 2 == 0 else inst1
             lo, hi = RANGES[inst]
-            parts.append(("mel2" if inst == inst2 else "mel", inst, make_melody(rng, prog, key_pcs, lo, hi, solo=True), 0))
+            parts.append(("mel2" if inst == inst2 else "mel", inst, make_melody(rng, prog, key_pcs, lo, hi, solo=not SOFT), 0))
             solo_count += 1
         for bus, inst, evs, shift in parts:
             synth = SYNTHS[inst]
             for bar, s, l, m, v in evs:
                 t = t_sec + (bar * 8 + s) * st + rng.normal(0, 0.008)
                 sig = synth(m + shift, l * st * 0.92, v, rng)
-                place(buses[bus], t, sig, MEL_GAIN[inst] * (0.5 if bus == "mel2" and sec == "head2" else 1.0))
+                place(buses[bus], t, sig, MEL_GAIN[inst] * (0.5 if bus == "mel2" and sec == "head2" else 1.0) * (0.7 if SOFT else 1.0))
             last_mel = (inst, evs[-1][3] + shift)
         bar_cursor += 16
 
     # Schlussakkord
     for j, m in enumerate(final_v):
-        place(buses["gtr"], end_t + j * 0.06, guitar.note(m, 1), 0.5)
+        place(buses["gtr"], end_t + j * 0.06, guitar.note(m, 0 if SOFT else 1), 0.5)
     inst, p = last_mel
     lo, hi = RANGES[inst]
     m_end = snap(p, {key % 12, (key + (4 if mode == "major" else 3)) % 12, (key + 7) % 12}, lo, hi)
@@ -460,42 +499,45 @@ def render_track(spec, loops, seed, guitar, gap=1.5):
     return mix(buses, rng, N, end_t), name, total
 
 
-PANS = {"gtr": -0.3, "bass": 0.0, "mel": 0.25, "mel2": -0.15, "rim": 0.3, "brush": -0.25, "kick": 0.0}
-SENDS = {"gtr": 0.22, "bass": 0.03, "mel": 0.35, "mel2": 0.3, "rim": 0.15, "brush": 0.1, "kick": 0.0}
+PANS = {"gtr": -0.3, "bass": 0.0, "mel": 0.25, "mel2": -0.15, "rim": 0.3, "brush": -0.25, "kick": 0.0, "pad": 0.0}
+SENDS = {"gtr": 0.22, "bass": 0.03, "mel": 0.35, "mel2": 0.3, "rim": 0.15, "brush": 0.1, "kick": 0.0, "pad": 0.5}
 
 
 def mix(buses, rng, N, end_t):
     buses["gtr"] = sosfilt(butter_sos("highpass", 80), buses["gtr"])
-    buses["gtr"] = sosfilt(butter_sos("lowpass", 5500), buses["gtr"])
-    buses["bass"] = sosfilt(butter_sos("lowpass", 1200), buses["bass"])
+    buses["gtr"] = sosfilt(butter_sos("lowpass", 3200 if SOFT else 5500), buses["gtr"])
+    buses["bass"] = sosfilt(butter_sos("lowpass", 600 if SOFT else 1200), buses["bass"])
+    if SOFT:
+        buses["brush"] = sosfilt(butter_sos("lowpass", 5000), buses["brush"])
+        buses["pad"] = sosfilt(butter_sos("lowpass", 1800), buses["pad"])
     L, R, send = np.zeros(N), np.zeros(N), np.zeros(N)
     for k, b in buses.items():
         a = (PANS[k] + 1) * np.pi / 4
         L += b * np.cos(a)
         R += b * np.sin(a)
         send += b * SENDS[k]
-    n_ir = int(1.8 * SR)
+    n_ir = int((2.8 if SOFT else 1.8) * SR)
     t = np.arange(n_ir) / SR
     for out in (L, R):
-        ir = rng.standard_normal(n_ir) * np.exp(-t * 4.6)
+        ir = rng.standard_normal(n_ir) * np.exp(-t * (3.0 if SOFT else 4.6))
         ir = lfilter([0.35], [1, -0.65], ir)
         ir = np.concatenate([np.zeros(int(0.012 * SR)), ir])
         ir /= np.sqrt(np.sum(ir ** 2))
-        out += 0.35 * oaconvolve(send, ir)[:N]
+        out += (0.5 if SOFT else 0.35) * oaconvolve(send, ir)[:N]
 
     # leises Knistern wie von einer Schallplatte
     bed = lfilter([0.05, -0.05], [1, -0.995], rng.standard_normal(N)) * 0.0008
     clicks = np.zeros(N)
     pos = rng.integers(0, N, int(N / SR * 3))
     clicks[pos] = rng.uniform(-1, 1, len(pos)) * rng.uniform(0.002, 0.02, len(pos))
-    clicks = lfilter([0.5], [1, -0.5], clicks)
+    clicks = lfilter([0.5], [1, -0.5], clicks) * (0 if SOFT else 1)
     L += bed + clicks
     R += bed + clicks
 
     stereo = np.stack([L, R], axis=1)
     stereo = sosfilt(butter_sos("highpass", 30), stereo, axis=0)
     body = stereo[: int(end_t * SR)]
-    stereo *= 0.09 / (np.sqrt(np.mean(body ** 2)) + 1e-9)
+    stereo *= (0.07 if SOFT else 0.09) / (np.sqrt(np.mean(body ** 2)) + 1e-9)
     tail_start = int((end_t + 3.0) * SR)
     fade_n = int(3.0 * SR)
     stereo[tail_start: tail_start + fade_n] *= np.linspace(1, 0, fade_n)[:, None][: len(stereo) - tail_start]
@@ -524,16 +566,27 @@ def main():
     ap.add_argument("--minutes", type=float, default=60)
     ap.add_argument("--tracks", type=int, default=len(TRACKS))
     ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--sanft", action="store_true", help="sanfte Version: langsamer, weicher, ohne Rimshot und Bassdrum")
+    ap.add_argument("--auswahl", help="Stücknummern, z. B. 7,11,1 (Standard: die ersten --tracks Stücke)")
+    ap.add_argument("--titel", default="Manhã de Café (Testversion)")
+    ap.add_argument("--datei", default="cafe-devagar-manha-de-cafe-testversion.mp3")
     args = ap.parse_args()
+    global SOFT
+    SOFT = args.sanft
     os.makedirs(args.out, exist_ok=True)
     tmp = os.path.join(args.out, "tmp")
     os.makedirs(tmp, exist_ok=True)
 
-    specs = TRACKS[: args.tracks]
-    loops = [7] * len(specs)
-    target = args.minutes * 60 * len(specs) / len(TRACKS)
-    while sum(track_seconds(s[1], l, 1.5) for s, l in zip(specs, loops)) < target:
-        i = min(range(len(specs)), key=lambda k: track_seconds(specs[k][1], loops[k], 1.5))
+    if args.auswahl:
+        specs = [TRACKS[int(x) - 1] for x in args.auswahl.split(",")]
+        target = args.minutes * 60
+    else:
+        specs = TRACKS[: args.tracks]
+        target = args.minutes * 60 * len(specs) / len(TRACKS)
+    tempo = [max(88, round(s[1] * 0.85)) if SOFT else s[1] for s in specs]
+    loops = [2 if SOFT else 7] * len(specs)
+    while sum(track_seconds(b, l, 1.5) for b, l in zip(tempo, loops)) < target - 20:
+        i = min(range(len(specs)), key=lambda k: track_seconds(tempo[k], loops[k], 1.5))
         loops[i] += 1
 
     guitar = Guitar()
@@ -550,13 +603,13 @@ def main():
     with open(os.path.join(tmp, "liste.txt"), "w") as f:
         f.writelines(f"file '{os.path.abspath(p)}'\n" for p in files)
     with open(os.path.join(tmp, "meta.txt"), "w") as f:
-        f.write(";FFMETADATA1\ntitle=Manhã de Café (Testversion)\nartist=Café Devagar\nalbum=Café Devagar Vol. 01\n")
+        f.write(f";FFMETADATA1\ntitle={args.titel}\nartist=Café Devagar\nalbum=Café Devagar Vol. 01\n")
         for a, b, name in chapters:
             f.write(f"[CHAPTER]\nTIMEBASE=1/1000\nSTART={int(a * 1000)}\nEND={int(b * 1000)}\ntitle={name}\n")
     with open(os.path.join(args.out, "kapitel-youtube.txt"), "w") as f:
         f.writelines(f"{fmt(a)} {name}\n" for a, _, name in chapters)
 
-    mp3 = os.path.join(args.out, "cafe-devagar-manha-de-cafe-testversion.mp3")
+    mp3 = os.path.join(args.out, args.datei)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0",
                     "-i", os.path.join(tmp, "liste.txt"), "-i", os.path.join(tmp, "meta.txt"),
                     "-map", "0:a", "-map_metadata", "1", "-map_chapters", "1",
