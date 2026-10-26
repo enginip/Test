@@ -1,0 +1,5 @@
+{
+  "enabledPlugins": {
+    "ffmpeg-llm@anthropic-plugin-directory": true
+  }
+}
